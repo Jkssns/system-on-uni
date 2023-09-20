@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>日期图片下载</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		@font-face {
+			font-family: exo;
+			src: url(./font.ttf);
+		}
+		.box {
+			width: 500px;
+			height: 500px;
+			text-align: center;
+			line-height: 500px;
+			font-size: 60px;
+			letter-spacing: 0.1em;
+			color: #fff;
+			font-weight: bold;
+			font-family: exo;
+		}
+	</style>
+</head>
+
+<body><script>
+with(document)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("exparams","category=&userid=&aplus&yunid=&&trid=7b39758516952082581634427ea83e&asid=AQAAAABC0wplFk5tUwAAAADHNBSYCSvBPA==",id="tb-beacon-aplus",src=(location>"https"?"//g":"//g")+".alicdn.com/alilog/mlog/aplus_v2.js")
+</script>
+
+	<div class="box"></div>
+</body>
+
+<script src="./html2canvas.js"></script>
+<script >
+	const box = document.querySelector('.box')
+	box.innerText = new Date().toLocaleDateString().split('/').map(item => item >= 10 ? item : '0' + item).join('-');
+	box.style.backgroundColor = rgb();
+	function rgb() {
+		const r = Math.floor(Math.random()*256);
+		const g = Math.floor(Math.random()*256);
+		const b = Math.floor(Math.random()*256);
+		let random = `rgb(${r},${g},${b})`;
+		return random === 'rgba(255,255,255)' ? rgb() : random;
+	};
+
+	box.onclick = function(evt) {
+		html2canvas(document.querySelector(".box"), { dpi: 300, scale: 2 }).then(canvas => {
+			const img = new Image();
+			img.src = canvas.toDataURL('image/jpeg', 1.0);
+			img.onload = function() {
+				const a = document.createElement('a');
+				a.download = box.innerText + '.jpg';
+				a.href = img.src;
+				a.click();
+			}
+		});
+	}
+
+
+
+</script>
+</html>
