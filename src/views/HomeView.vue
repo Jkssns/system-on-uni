@@ -5,11 +5,10 @@
 	<p style="margin-top: 20px;"></p>
 
 	<a-table
-		class="math_table" 
 		:dataSource="dataSource" 
 		:columns="columns" 
-		:pagination="false" 
-		bordered
+		:pagination="false"
+		@resizeColumn="handleResizeColumn"
 	>
 		<template #bodyCell="{ column, record, index  }">
 			<template v-if="column.key === 'matchNumStr'">
@@ -31,6 +30,7 @@
 			</template>
 		</template>
 	</a-table>
+
 </template>
 
 <script setup>
@@ -39,24 +39,26 @@ import { Button as AButton, Table as ATable, Input as AInput } from 'ant-design-
 import html2canvas from 'html2canvas';
 
 const dataSource = ref([]);
-const columns = [
+const columns = ref([
 	{
 		title: '编号',
 		dataIndex: 'matchNumStr',
 		key: 'matchNumStr',
-		width: '100px',
+		width: 300,
+		resizable: true,
 	},
 	{
 		title: '赛事',
 		dataIndex: 'homeTeamAllName',
 		key: 'homeTeamAllName',
+		resizable: true,
 	},
 	{
 		title: '预测',
 		dataIndex: 'prediction',
 		key: 'prediction',
 	},
-];
+]);
 const today = new Date().toLocaleDateString().split('/').map(item => item >= 10 ? item : '0' + item).join('-');
 
 function handleGenerator() {
@@ -68,7 +70,12 @@ function handleGenerator() {
 				const todayMatch = data.matchDateList.find(item => item.businessDate === today);
 				if (todayMatch) {
 					const matchObj = data.matchInfoList.find(item => item.weekday === todayMatch.businessDateCn);
-					dataSource.value = matchObj.subMatchList;
+					dataSource.value = matchObj.subMatchList.map((item, index) => {
+						return {
+							...item,
+							key: item.businessDate + index,
+						}
+					});
 				}
 			}
 		})
@@ -87,6 +94,10 @@ function handleDownload () {
 			a.remove();
 		}
 	});
+}
+
+function handleResizeColumn(w, col) {
+  col.width = w;
 }
 </script>
 
