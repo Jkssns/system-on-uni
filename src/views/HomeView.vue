@@ -5,6 +5,7 @@
 	<p style="margin-top: 20px;"></p>
 
 	<a-table
+		class="match_table"
 		:dataSource="dataSource" 
 		:columns="columns" 
 		:pagination="false"
@@ -83,7 +84,7 @@ function handleGenerator() {
 }
 
 function handleDownload () {
-	html2canvas(document.querySelector(".math_table"), { dpi: 300, scale: 2 }).then(canvas => {
+	html2canvas(document.querySelector(".match_table"), { dpi: 300, scale: 2 }).then(canvas => {
 		const img = new Image();
 		img.src = canvas.toDataURL('image/jpeg', 1.0);
 		img.onload = function() {
