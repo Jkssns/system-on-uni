@@ -149,7 +149,7 @@ function handleSpan({ target }) {
 <style lang="scss" scoped>
 	.text_wrapper {
 		width: 100%;
-		height: 30px;
+		height: 35px;
 	}
 
 	.multiple_wrapper {
@@ -159,9 +159,9 @@ function handleSpan({ target }) {
 		span {
 			display: inline-block;
 			width: 33%;
-			min-height: 30px;
+			min-height: 35px;
 			text-align: center;
-			line-height: 30px;
+			line-height: 35px;
 			border: 1px solid #F0F0F0;
 			box-sizing: border-box;
 			cursor: pointer;
@@ -178,7 +178,7 @@ function handleSpan({ target }) {
 			position: absolute;
 			left: -1.5em;
 			font-size: 12px;
-			line-height: 30px;
+			line-height: 35px;
 			color: red;
 		}
 		span:nth-child(1), span:nth-child(2) {
