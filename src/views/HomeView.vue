@@ -9,6 +9,7 @@
 			class="match_table"
 			:dataSource="dataSource" 
 			:columns="columns" 
+			bordered
 			:pagination="false"
 			@resizeColumn="handleResizeColumn"
 		>
@@ -163,7 +164,7 @@ function handleSpan({ target }) {
 			text-align: center;
 			line-height: 35px;
 			border: 1px solid #F0F0F0;
-			box-sizing: border-box;
+			border-right: none;
 			cursor: pointer;
 		}
 		.had {
@@ -181,12 +182,15 @@ function handleSpan({ target }) {
 			line-height: 35px;
 			color: red;
 		}
-		span:nth-of-type(1), span:nth-of-type(2) {
-			border-right: none;
-		}
 	}
 
 	:deep(td.ant-table-cell:nth-child(3)) {
 		padding: 0;
+	}
+	:deep(tr.ant-table-row:nth-last-of-type(odd)) {
+		background: #f8f8f8;
+		.had {
+			background-color: white;
+		}
 	}
 </style>
